@@ -1,0 +1,126 @@
+:root {
+    --color-background: rgb(246, 246, 246);
+    --color-text: #1e293b;
+    --color-navbar-bg: rgb(59, 56, 56);
+    --color-navbar-text: #ffffff;
+    --color-navbar-hover: rgb(139, 138, 138);
+    --color-title: teal;
+    --color-button: gold;
+    --color-accent: rgb(255, 168, 131);
+}
+
+.dashboard-page #content-wrapper {
+    margin-left: 260px;
+    margin-top: 60px;
+    margin-bottom: 50px;
+    background-color: var(--color-background);
+}
+
+@media (min-width: 768px) {
+    .dashboard-page .offcanvas-start {
+        visibility: visible !important;
+        transform: none !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 260px !important;
+        height: 100%;
+        background-color: var(--color-navbar-bg);
+        padding: 0 !important;
+        z-index: 100;
+    }
+
+    .dashboard-page .sidebar {
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .dashboard-page .navbar,
+    .dashboard-page #dwidth {
+        left: 260px !important;
+        width: calc(100% - 260px) !important;
+    }
+
+    .dashboard-page footer,
+    .dashboard-page #fwidth {
+        left: 260px !important;
+        width: calc(100% - 260px) !important;
+    }
+
+    .dashboard-page .dashboard-sidebar-toggler {
+        display: none !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .dashboard-page #content-wrapper {
+        margin-left: 0 !important;
+    }
+
+    .dashboard-page .dashboard-sidebar-toggler {
+        display: block !important;
+        background-color: var(--color-navbar-bg);
+    }
+
+    .sidebar,
+    .offcanvas {
+        height: 100%;
+        background-color: var(--color-navbar-bg);
+        color: var(--color-navbar-text);
+    }
+
+    .dashboard-page .navbar,
+    .dashboard-page #dwidth {
+        left: 0 !important;
+        width: 100% !important;
+    }
+}
+
+.sidebar a {
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.sidebar-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-link {
+    display: block;
+    color: var(--color-navbar-text);
+    padding: 10px 15px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.sidebar-link:hover {
+    background-color: var(--color-navbar-hover);
+}
+.sidebar-link.active {
+    background-color: var(--color-navbar-hover);
+}
+
+.title{
+    font-size: 40px;
+}
+.card-title{
+    font-size: 2rem;
+}
+
+.bgcolor1 {
+    background-color: var(--color-button);
+}
+
+.bgcolor2 {
+    background-color: var(--color-title);
+}
+
+.bgcolor3 {
+    background-color: var(--color-accent);
+}
+
+.card-title,
+.card-text {
+    color: var(--color-navbar-text);
+}
