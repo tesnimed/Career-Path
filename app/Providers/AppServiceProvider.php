@@ -19,9 +19,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // إجبار تشغيل الـ HTTPS عند رفع المشروع على السيرفر
-        if (config('app.env') === 'production' || env('APP_ENV') === 'production') {
-            \Illuminate\Support\Facades\URL::forceScheme('https');
-        }
+        //
     }
 }
