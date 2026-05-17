@@ -36,5 +36,5 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->name('dashboard.')->g
     Route::resource('skill_categories', SkillCategoryController::class);
     Route::resource('users', UserController::class);
     Route::get('universities/{university}/manage-majors', [UniversityController::class, 'manageMajors'])->name('universities.majors');
-    Route::get('/majors/{id}', [MajorController::class, 'show'])->name('majors.show');
+
 });
