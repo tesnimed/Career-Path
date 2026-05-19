@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Major;
 use App\Models\Skill;
 use App\Models\SkillCategory;
+use Illuminate\Support\Facades\DB;
 
 class MajorSkillSeeder extends Seeder 
 {
@@ -18,6 +19,8 @@ class MajorSkillSeeder extends Seeder
         $skillsByCategory = Skill::all()->groupBy('category_id')->map(function ($group) {
             return $group->pluck('id')->toArray();
         });
+
+        $pivotData = [];
 
         foreach (Major::all() as $major) {
             // تحويل الاسم لصغير لضمان دقة البحث (Case-insensitive)
@@ -32,66 +35,83 @@ class MajorSkillSeeder extends Seeder
                     $skillsByCategory[$categories['Analitik Düşünme']] ?? []
                 );
             }
-            // 2. الطب والعلوم الصحية (Health & Medical)
-            elseif (preg_match('/(tıp|tıb|sağlık|hemşire|eczac|veteriner|diş|ebelik|fizyo|laboratuvar|anestezi|diyaliz|rehabilitasyon|optik|acil yardım)/', $majorName)) {
+            // 2. الطب والعلوم الصحية والدبلومات الطبية (Health & Medical)
+            elseif (preg_match('/(tıp|tıb|sağlık|hemşire|eczac|veteriner|diş|ebelik|fizyo|laboratuvar|anestezi|diyaliz|rehabilitasyon|optik|acil yardım|protez)/', $majorName)) {
                 $skillIds = array_merge(
                     $skillsByCategory[$categories['Teknik Beceriler']] ?? [],
-                    $skillsByCategory[$categories['Sosyal Beceriler']] ?? []
+                    $skillsByCategory[$categories['Sosyal Beceriler']] ?? [],
+                    $skillsByCategory[$categories['Kişisel Gelişim']] ?? []
                 );
             }
-            // 3. الإدارة والتجارة (Business & Admin)
-            elseif (preg_match('/(işletme|yönetim|iktisat|ekonomi|finans|maliye|muhasebe|pazarlama|ticaret|lojistik|banka|sigorta|emlak|gümrük|kamu)/', $majorName)) {
+            // 3. الإدارة والتجارة والطيران (Business & Admin & Aviation)
+            elseif (preg_match('/(işletme|yönetim|iktisat|ekonomi|finans|maliye|muhasebe|pazarlama|ticaret|lojistik|banka|sigorta|emlak|gümrük|kamu|havacılık|kabin|havalimanı)/', $majorName)) {
                 $skillIds = array_merge(
                     $skillsByCategory[$categories['Yönetim ve Liderlik']] ?? [],
                     $skillsByCategory[$categories['Pazarlama ve Satış']] ?? [],
+                    $skillsByCategory[$categories['İletişim Becerileri']] ?? [],
                     $skillsByCategory[$categories['Analitik Düşünme']] ?? []
                 );
             }
-            // 4. التصميم والفنون (Design & Arts)
-            elseif (preg_match('/(tasarım|mimar|sanat|grafik|moda|fotoğraf|film|kurgu|animasyon|iç mekan|çizgi|el sanatları)/', $majorName)) {
+            // 4. التصميم والفنون والعمارة (Design & Arts)
+            elseif (preg_match('/(tasarım|mimar|sanat|grafik|moda|fotoğraf|film|kurgu|animasyon|iç mekan|çizgi|el sanatları|sahne|seramik)/', $majorName)) {
                 $skillIds = array_merge(
                     $skillsByCategory[$categories['Tasarım ve Kreatif']] ?? [],
                     $skillsByCategory[$categories['Bilgisayar ve Yazılım']] ?? []
                 );
             }
-            // 5. اللغات والترجمة (Languages)
+            // 5. اللغات والترجمة (Languages & Translation)
             elseif (preg_match('/(dil|edebiyat|mütercim|tercüman|çevirmen|ingilizce|almanca|arapça|fransızca|ispanyolca|rusça|japonca|kore)/', $majorName)) {
                 $skillIds = array_merge(
                     $skillsByCategory[$categories['Dil Becerileri']] ?? [],
                     $skillsByCategory[$categories['İletişim Becerileri']] ?? []
                 );
             }
-            // 6. الإعلام والتواصل (Media & Communication)
-            elseif (preg_match('/(iletişim|medya|gazeteci|halkla ilişkiler|reklam|radyo|televizyon|sinema)/', $majorName)) {
+            // 6. الإعلام والتواصل والشبكات الاجتماعية (Media & Communication)
+            elseif (preg_match('/(iletişim|medya|gazeteci|halkla ilişkiler|reklam|radyo|televizyon|sinema|sosyal medya)/', $majorName)) {
                 $skillIds = array_merge(
                     $skillsByCategory[$categories['İletişim Becerileri']] ?? [],
-                    $skillsByCategory[$categories['Sosyal Beceriler']] ?? [],
-                    $skillsByCategory[$categories['Kişisel Gelişim']] ?? []
+                    $skillsByCategory[$categories['Sosyal Beceriler']] ?? []
                 );
             }
-            // 7. العلوم الأساسية والتعليم (Science & Education)
-            elseif (preg_match('/(öğretmen|fen|fizik|kimya|biyoloji|matematik|istatistik|astronomi|tarih|coğrafya|sosyoloji|felsefe|psikoloji)/', $majorName)) {
+            // 7. العلوم الأساسية، التربية، والطهي (Science, Education & Gastronomy)
+            elseif (preg_match('/(öğretmen|fen|fizik|kimya|biyoloji|matematik|istatistik|astronomi|tarih|coğrafya|sosyoloji|felsefe|psikoloji|gastronomi|aşçılık|pasta)/', $majorName)) {
                 $skillIds = array_merge(
                     $skillsByCategory[$categories['Analitik Düşünme']] ?? [],
-                    $skillsByCategory[$categories['Kişisel Gelişim']] ?? []
+                    $skillsByCategory[$categories['Kişisel Gelişim']] ?? [],
+                    $skillsByCategory[$categories['Sosyal Beceriler']] ?? []
                 );
             }
-            // 8. الزراعة والبيئة والطيران (Specialized Technical)
-            elseif (preg_match('/(tarım|bahçe|orman|gıda|havacılık|uçak|pilot|deniz|gemi|yat)/', $majorName)) {
+            // 8. الزراعة، البيئة، والتقنيات المتخصصة (Specialized Technical)
+            elseif (preg_match('/(tarım|bahçe|orman|gıda|uçak|pilot|deniz|gemi|yat)/', $majorName)) {
                 $skillIds = array_merge(
                     $skillsByCategory[$categories['Teknik Beceriler']] ?? [],
                     $skillsByCategory[$categories['Analitik Düşünme']] ?? []
                 );
             }
-            // 9. احتياطي (في حال لم يطابق شيء)
+            // 9. احتياطي (في حال لم يطابق أي كلمة دلالية)
             else {
                 $skillIds = Skill::inRandomOrder()->take(5)->pluck('id')->toArray();
             }
 
-            // ربط المهارات بالتخصص (تجنب التكرار باستخدام syncWithoutDetaching)
-            if (!empty($skillIds)) {
-                $major->skills()->syncWithoutDetaching(array_filter(array_unique($skillIds)));
+            // تنظيف المصفوفة من التكرار والقيم الفارغة
+            $skillIds = array_filter(array_unique($skillIds));
+
+            // تم إزالة حقول الوقت هنا لحل المشكلة تماماً وعمل التوافق
+            foreach ($skillIds as $skillId) {
+                $pivotData[] = [
+                    'major_id' => $major->id,
+                    'skill_id' => $skillId,
+                ];
             }
+
+            if (count($pivotData) >= 1000) {
+                DB::table('major_skill')->insertOrIgnore($pivotData);
+                $pivotData = [];
+            }
+        }
+
+        if (!empty($pivotData)) {
+            DB::table('major_skill')->insertOrIgnore($pivotData);
         }
     }
 }

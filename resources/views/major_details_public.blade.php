@@ -11,7 +11,7 @@
             <div class="d-flex gap-3 mb-4">
                 <div class="p-2 border rounded bg-light">
                     <strong class="thead">Eğitim Dili:</strong>
-                    <span class="badge fs-6 me-2">{{ $major->education_language }}</span>
+                    <span class="badge fs-6 me-2">{{ $availableLanguages }}</span>
                 </div>
 
                 <div class="p-2 border rounded bg-light">

@@ -9,7 +9,7 @@ class UniversitySeeder extends Seeder
 {
     public function run(): void
     {
-        // 1. مجموعة الجامعات الوقفية (41 جامعة)
+        // İstanbul'daki Vakıf Üniversiteleri (Mevcut listeniz aynen korundu)
         $vakifUniversities = [
             ['name' => 'Bahçeşehir Üniversitesi', 'district' => 'Beşiktaş', 'side' => 'Avrupa', 'langs' => ['TR', 'EN'], 'desc' => 'Küresel eğitim ağı ve Beşiktaş sahilindeki kampüsüyle bilinen, yenilikçi bir üniversitedir.'],
             ['name' => 'Yeditepe Üniversitesi', 'district' => 'Ataşehir', 'side' => 'Anadolu', 'langs' => ['TR', 'EN'], 'desc' => 'Atatürkçü düşüncelerin ışığında, geniş kampüs olanaklarıyla eğitim veren köklü bir vakıf üniversitesidir.'],
@@ -26,7 +26,7 @@ class UniversitySeeder extends Seeder
             ['name' => 'Maltepe Üniversitesi', 'district' => 'Maltepe', 'side' => 'Anadolu', 'langs' => ['TR', 'EN'], 'desc' => '"Düşüncelerde özgür, eğitimde çağdaş" felsefesiyle geniş akademik yelpazeye sahiptir.'],
             ['name' => 'İstanbul Sabahattin Zaim Üniversitesi', 'district' => 'Küçükçekmece', 'side' => 'Avrupa', 'langs' => ['TR', 'EN'], 'desc' => 'Tarihi kampüsü ve değerler odaklı eğitim anlayışıyla dikkat çeken bir yükseköğretim kurumudur.'],
             ['name' => 'Kadir Has Üniversitesi', 'district' => 'Fatih', 'side' => 'Avrupa', 'langs' => ['TR', 'EN'], 'desc' => 'Haliç kıyısındaki tarihi binasında, yenilikçi ve proje odaklı eğitim sunan bir üniversitedir.'],
-            ['name' => 'Haliç Üniversitesi', 'district' => 'Beyoğlu', 'side' => 'Avrupa', 'langs' => ['TR', 'EN'], 'desc' => 'Sanat, spor ve sağlık alanlarındaki başarılarıyla bilinen, İstanbul’un merkezinde bir kurumdur.'],
+            ['name' => 'Haliç Üniversitesi', 'district' => 'Beyoğlu', 'side' => 'Avrupa', 'langs' => ['TR', 'EN'], 'desc' => 'Sanat, spor and sağlık alanlarındaki başarılarıyla bilinen, İstanbul’un merkezinde bir kurumdur.'],
             ['name' => 'Doğuş Üniversitesi', 'district' => 'Ümraniye', 'side' => 'Anadolu', 'langs' => ['TR', 'EN'], 'desc' => 'Kaliteli eğitim kadrosuyla iş dünyasına donanımlı mezunlar yetiştiren bir vakıf üniversitesidir.'],
             ['name' => 'Altınbaş Üniversitesi', 'district' => 'Bağcılar', 'side' => 'Avrupa', 'langs' => ['TR', 'EN'], 'desc' => 'Özellikle tıp ve mühendislik alanlarında uluslararası odaklı eğitim veren dinamik bir kurumdur.'],
             ['name' => 'Fatih Sultan Mehmet Vakıf Üniversitesi', 'district' => 'Fatih', 'side' => 'Avrupa', 'langs' => ['TR'], 'desc' => 'Geleneksel sanatlar ve sosyal bilimlerde derinleşmiş bir vakıf kültür mirası kurumudur.'],
@@ -57,14 +57,31 @@ class UniversitySeeder extends Seeder
             ['name' => 'Demiroğlu Bilim Üniversitesi', 'district' => 'Şişli', 'side' => 'Avrupa', 'langs' => ['TR'], 'desc' => 'Türkiye’nin ilk sağlık tematik üniversitesi olarak tıp eğitiminde uzmanlaşmıştır.'],
         ];
 
-        // 2. مجموعة المعاهد المهنية (Vakıf Meslek Yüksekokulları)
+        // YENİ: İstanbul'daki Tüm Devlet Üniversiteleri
+        $devletUniversities = [
+            ['name' => 'İstanbul Üniversitesi', 'district' => 'Fatih', 'side' => 'Avrupa', 'langs' => ['TR', 'EN'], 'desc' => 'Türkiye’nin en eski, köklü ve tarihi yarımadanın merkezinde yer alan lider devlet üniversitesidir.'],
+            ['name' => 'İstanbul Teknik Üniversitesi', 'district' => 'Sarıyer', 'side' => 'Avrupa', 'langs' => ['TR', 'EN'], 'desc' => 'Mühendislik ve mimarlık alanında dünya çapında tanınan, Türkiye’nin en köklü teknik üniversitesidir.'],
+            ['name' => 'Boğaziçi Üniversitesi', 'district' => 'Beşiktaş', 'side' => 'Avrupa', 'langs' => ['EN'], 'desc' => 'Seçkin akademik kadrosu ve araştırma odaklı eğitim kalitesiyle bilinen prestijli bir devlet üniversitesidir.'],
+            ['name' => 'Yıldız Teknik Üniversitesi', 'district' => 'Esenler', 'side' => 'Avrupa', 'langs' => ['TR', 'EN'], 'desc' => 'Fen bilimleri, mühendislik ve sosyal bilimlerde uygulamalı ve yenilikçi eğitim veren köklü bir kurumdur.'],
+            ['name' => 'Marmara Üniversitesi', 'district' => 'Kadıköy', 'side' => 'Anadolu', 'langs' => ['TR', 'EN'], 'desc' => 'Çok dilli eğitim modeliyle öne çıkan, Türkiye’nin en büyük ve en köklü üniversitelerinden biridir.'],
+            ['name' => 'Mimar Sinan Güzel Sanatlar Üniversitesi', 'district' => 'Beyoğlu', 'side' => 'Avrupa', 'langs' => ['TR'], 'desc' => 'Sanat, mimarlık ve kültür alanlarında Türkiye’nin ilk ve en öncü devlet yükseköğretim kurumudur.'],
+            ['name' => 'İstanbul Medeniyet Üniversitesi', 'district' => 'Kadıköy', 'side' => 'Anadolu', 'langs' => ['TR', 'EN'], 'desc' => 'Uluslararası vizyona sahip, araştırma odaklı ve hızla gelişen yeni nesil bir devlet üniversitesidir.'],
+            ['name' => 'Türk-Alman Üniversitesi', 'district' => 'Beykoz', 'side' => 'Anadolu', 'langs' => ['EN', 'TR'], 'desc' => 'Türkiye ile Almanya iş birliğinde kurulan, çok dilli ve çok kültürlü devlet araştırma üniversitesidir.'],
+            ['name' => 'Galatasaray Üniversitesi', 'district' => 'Beşiktaş', 'side' => 'Avrupa', 'langs' => ['EN', 'TR'], 'desc' => 'Fransızca ve Türkçe eğitim veren, uluslararası anlaşmalarıyla seçkinleşmiş butik bir devlet üniversitesidir.'],
+            ['name' => 'Sağlık Bilimleri Üniversitesi', 'district' => 'Üsküdar', 'side' => 'Anadolu', 'langs' => ['TR', 'EN'], 'desc' => 'Mekteb-i Tıbbiye-i Şahane’nin mirası üzerine kurulan, sağlık alanında uzmanlaşmış tematik devlet üniversitesidir.'],
+            ['name' => 'İstanbul Üniversitesi-Cerrahpaşa', 'district' => 'Avcılar', 'side' => 'Avrupa', 'langs' => ['TR', 'EN'], 'desc' => 'Tıp, mühendislik ve veterinerlik gibi alanlarda köklü bir geçmişe ve yüksek araştırma kapasitesine sahip kurumdur.'],
+            ['name' => 'Milli Savunma Üniversitesi', 'district' => 'Beşiktaş', 'side' => 'Avrupa', 'langs' => ['TR'], 'desc' => 'Askeri eğitim ve savunma sanayi alanında nitelikli subay ve profesyoneller yetiştiren devlet kurumudur.'],
+            ['name' => 'Türk-Japon Bilim ve Teknoloji Üniversitesi', 'district' => 'Pendik', 'side' => 'Anadolu', 'langs' => ['EN'], 'desc' => 'Türkiye ve Japonya ortaklığıyla bilim ve ileri teknoloji araştırmaları için kurulmuş özel statülü devlet üniversitesidir.'],
+        ];
+
+        // Vakıf Meslek Yüksekokulları
         $vakifVocationalSchools = [
             ['name' => 'İstanbul Sağlık ve Sosyal Bilimler Meslek Yüksekokulu', 'district' => 'Fatih', 'side' => 'Avrupa', 'langs' => ['TR'], 'desc' => 'Sağlık ve sosyal hizmetler alanında yetkin teknik eleman yetiştiren uzmanlaşmış bir meslek yüksekokuludur.'],
             ['name' => 'Ataşehir Adıgüzel Meslek Yüksekokulu', 'district' => 'Ataşehir', 'side' => 'Anadolu', 'langs' => ['TR'], 'desc' => 'İş dünyasının ihtiyaç duyduğu nitelikli mesleki eğitimi sunan, modern bir teknik eğitim kurumudur.'],
             ['name' => 'İstanbul Şişli Meslek Yüksekokulu', 'district' => 'Şişli', 'side' => 'Avrupa', 'langs' => ['TR'], 'desc' => 'Şehrin merkezinde, farklı sektörlere yönelik uygulamalı mesleki eğitim veren köklü bir yüksekokuldur.'],
         ];
 
-        // معالجة الجامعات
+        // Vakıf Üniversitelerini İşleme
         foreach ($vakifUniversities as $uni) {
             University::updateOrCreate(
                 ['name' => $uni['name']],
@@ -78,7 +95,21 @@ class UniversitySeeder extends Seeder
             );
         }
 
-        // معالجة المعاهد
+        // Devlet Üniversitelerini İşleme (Yeni Eklenen Döngü)
+        foreach ($devletUniversities as $uni) {
+            University::updateOrCreate(
+                ['name' => $uni['name']],
+                [
+                    'description' => $uni['desc'],
+                    'type' => 'devlet',
+                    'district' => $uni['district'],
+                    'side' => $uni['side'],
+                    'education_languages' => $uni['langs'],
+                ]
+            );
+        }
+
+        // Vakıf Meslek Yüksekokullarını İşleme
         foreach ($vakifVocationalSchools as $school) {
             University::updateOrCreate(
                 ['name' => $school['name']],

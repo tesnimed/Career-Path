@@ -5,7 +5,7 @@
 <div class="container mt-5 mb-5">
     <h2 class="mb-4 mt-5 title">Size En Uygun Bölümler (Sonuçlar)</h2>
     <div class="row">
-        @forelse($matchingMajors as $major)
+        @forelse($matchingMajors->unique('name') as $major)
         <div class="col-md-4 mb-4">
             <div class="card h-100 shadow-lg">
                 <div class="card-body text-center">

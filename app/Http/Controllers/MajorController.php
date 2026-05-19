@@ -46,9 +46,14 @@ class MajorController extends Controller
     {
         // جلب بيانات التخصص مع الجامعات المرتبطة به من الداتابيز
         $major = Major::with('universities')->findOrFail($id);
+
+        // البحث عن كل اللغات المتوفرة لنفس اسم التخصص ودمجها بنص واحد (مثلاً: TR / EN)
+        $availableLanguages = Major::where('name', $major->name)
+                               ->pluck('education_language')
+                               ->implode(' / ');
         
         // عرض الصفحة العامة الجديدة
-        return view('major_details_public', compact('major'));
+        return view('major_details_public', compact('major', 'availableLanguages'));
     }
     public function update(Request $request, $id)
 {

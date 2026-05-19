@@ -10,66 +10,68 @@ class SkillSeeder extends Seeder
 {
     public function run(): void
     {
-        // Tüm 100 beceri, SkillCategorySeeder'daki 10 ana kategoriye dağıtıldı.
+        // تم تحديث وتوزيع المهارات لتتناسق تماماً مع تخصصات البكالوريوس والدبلوم الجديدة
         $data = [
             'Teknik Beceriler' => [
-                // Mühendislik ve Sağlık Bilimleri Becerileri (40 Beceri)
+                // مهارات هندسية، طبية، وصحية تقنية
                 'İleri Matematik', 'Genel Fizik', 'Statik ve Dinamik Analiz', 'Termodinamik Prensipleri', 
-                'Elektreksel Devre Tasarımı', 'Malzeme Bilimi', 'Akışkanlar Mekaniği', 'Kontrol Sistemleri', 
-                'Mikroişlemciler', 'Kimyasal Süreç Yönetimi', 'İnsan Anatomisi', 'Fizyoloji', 
-                'Tıbbi Biyokimya', 'Farmakoloji', 'Patoloji', 'Klinik Mikrobiyoloji', 
-                'Histoloji ve Embriyoloji', 'Diş Morfolojisi', 'Restoratif Diş Tedavisi', 'Epidemiyoloji', 
-                'İmmünoloji', 'Genetik ve Kalıtım', 'Radyolojik Görüntüleme', 'Hematoloji', 
-                'Cerrahi Teknikler', 'Nörolojik Bilimler', 'Ortodonti Prensipleri'
+                'Elektriksel Devre Tasarımı', 'Malzeme Bilimi', 'Akışkanlar Mekaniği', 'Kontrol Sistemleri', 
+                'Kimyasal Süreç Yönetimi', 'İnsan Anatomisi', 'Fizyoloji', 'Tıbbi Biyokimya', 
+                'Farmakoloji', 'Patoloji', 'Klinik Mikrobiyoloji', 'Histoloji ve Embriyoloji', 
+                'Diş Morfolojisi', 'Restoratif Diş Tedavisi', 'Epidemiyoloji', 'İmmünoloji', 
+                'Genetik ve Kalıtım', 'Radyolojik Görüntüleme', 'Cerrahi Teknikler', 'Anestezi Uygulamaları',
+                'İlk Yardım ve Acil Müdahale', 'Ortodonti Prensipleri', 'Biyomedikal Cihaz Teknolojisi',
+                'Optisyenlik ve Cam Montajı', 'Diş Protez Teknolojisi', 'Diyaliz Ekipman Yönetimi'
             ],
             'Bilgisayar ve Yazılım' => [
+                // مهارات الحاسوب، البرمجة، والذكاء الاصطناعي والأمن السيبراني
                 'Algoritma Geliştirme', 'Veri Yapıları', 'Yapay Zeka Mantığı', 'Yazılım Mimarisi', 
-                'Gömülü Sistemler', 'Web Tasarımı', 'UX Tasarımı', 'Bilgisayar Onarımı', 
-                'Dijital Sanat Teknikleri', 'Animasyon Teknikleri'
+                'Gömülü Sistemler', 'Web Tasarımı ve Front-end', 'UX/UI Tasarımı', 'Siber Güvenlik ve Ağ Savunması',
+                'Veri Tabanı Yönetimi', 'Mobil Uygulama Geliştirme (iOS/Android)', 'Bulut Bilişim', 
+                'Bilgisayar Ağları ve Sunucu Yönetimi', 'Adli Bilişim Analizi', 'Dijital Oyun Tasarımı'
             ],
             'İletişim Becerileri' => [
-                // Eğitim ve Sosyal Bilimler Becerileri
-                'Sınıf Yönetimi', 'Halkla İlişkiler', 'Rehberlik ve Psikolojik Danışmanlık', 
-                'Türkçe Dil Bilgisi', 'Yabancı Dil Öğretimi', 'Medya Analizi', 
-                'Büro Yönetimi', 'Kabin Hizmetleri', 'Halk Sağlığı Analizi'
+                'Sınıf Yönetimi', 'Halkla İlişkiler', 'Rehberlik ve Danışmanlık', 'Büro Yönetimi', 
+                'Kabin Hizmetleri ve Yolcu İlişkileri', 'Medya Analizi', 'Gazetecilik ve Haber Yazımı', 
+                'Kurumsal İletişim', 'Diksiyon ve Hitabet'
             ],
             'Tasarım ve Kreatif' => [
-                // Sanat ve Mimarlık Becerileri (20 Beceri)
                 'Mimari Proje Tasarımı', 'İç Mimari Restorasyon', 'Grafiksel Görselleştirme', 
-                'Şehir Bölge Planlama', 'Perspektif ve Eskiz', 'Sanat Tarihi Analizi', 
-                'Peyzaj Tasarımı', 'Endüstriyel Modelleme', 'Tekstil ve Moda Tasarımı', 
-                'Sinema Kurgusu', 'Fotoğrafçılık Teknikleri', 'Tipografi', 'Müzik Teorisi', 
-                'Sahne ve Dekor Tasarımı', 'Estetik Kuramları', 'Restorasyon', 
-                'Seramik ve Heykel', 'Materyal Tasarımı', 'Yaratıcı Drama'
+                'Şehir Bölge Planlama', 'Perspektif ve Eskiz', 'Peyzaj Tasarımı', 
+                'Endüstriyel Modelleme', 'Tekstil ve Moda Tasarımı', 'Sinema Kurgusu ve Montaj', 
+                'Fotoğrafçılık Teknikleri', 'Tipografi', 'Müzik Teorisi', 'Sahne ve Dekor Tasarımı', 
+                'Seramik ve Cam Tasarımı', '3D Modelleme ve Animasyon'
             ],
             'Yönetim ve Liderlik' => [
-                // Uygulamalı Bilimler Becerileri
                 'Lojistik Yönetimi', 'İnsan Kaynakları', 'Havacılık Yönetimi', 'İş Sağlığı ve Güvenliği', 
-                'E-Ticaret Yönetimi', 'Okul Yönetimi', 'Turizm İşletmeciliği', 'Gastronomi Teknikleri'
+                'E-Ticaret Yönetimi', 'Turizm ve Otel İşletmeciliği', 'Havalimanı Yer Hizmetleri Yönetimi',
+                'Stratejik Yönetim', 'Proje Yönetimi', 'Kriz ve Afet Yönetimi'
             ],
             'Pazarlama ve Satış' => [
                 'Dış Ticaret Mevzuatı', 'Bankacılık ve Sigorta', 'Pazarlama Stratejileri', 
-                'Gayrimenkul Değerleme', 'Finansal Muhasebe', 'Uluslararası İlişkiler'
+                'Dijital Pazarlama ve Reklamcılık', 'Finansal Muhasebe', 'Uluslararası İlişkiler', 
+                'Müşteri İlişkileri Yönetimi (CRM)', 'Sağlık Turizmi Pazarlaması'
             ],
             'Sosyal Beceriler' => [
                 'Eğitim Psikolojisi', 'Özel Eğitim Yöntemleri', 'Erken Çocukluk Gelişimi', 
-                'Eğitim Sosyolojisi', 'Kapsayıcı Eğitim'
+                'Eğitim Sosyolojisi', 'Sosyal Hizmet ve Toplumsal Destek', 'Sosyal Medya Yönetimi'
             ],
             'Analitik Düşünme' => [
                 'Sayısal Analiz', 'Yöneylem Araştırması', 'Olasılık ve İstatistik', 
-                'Ölçme ve Değerlendirme', 'Hukuk Prensipleri'
+                'Ölçme ve Değerlendirme', 'Hukuk Prensipleri', 'Büyük Veri Analitiği', 'Finansal Analiz'
             ],
             'Dil Becerileri' => [
-                'Akademik İngilizce', 'Teknik Çeviri', 'Okuma-Yazma Öğretimi'
+                'Akademik İngilizce', 'Teknik Çeviri (İngilizce)', 'Arapça Çevirmenlik ve Tercüme', 
+                'Alman Dili Analizi', 'Rusça Akademik Çeviri', 'Fransızca Dil Yapısı'
             ],
             'Kişisel Gelişim' => [
-                'Hayat Boyu Öğrenme', 'Tıbbi Etik', 'Program Geliştirme', 
-                'Öğretim Teknolojileri', 'Eğitim Tarihi'
+                'Hayat Boyu Öğrenme', 'Tıbbi Etik ve Deontoloji', 'Program Geliştirme', 
+                'Öğretim Teknolojileri', 'Gastronomi ve Mutfak Teknikleri', 'Pastacılık ve Ekmekçilik'
             ]
         ];
 
         foreach ($data as $categoryName => $skills) {
-            // Kategoriyi isme göre bul (Yeni oluşturmaz, SkillCategorySeeder'dakileri kullanır)
+            // Kategoriyi isme göre bul
             $category = SkillCategory::where('name', $categoryName)->first();
 
             if ($category) {
