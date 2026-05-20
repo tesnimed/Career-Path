@@ -120,7 +120,9 @@ class MajorSeeder extends Seeder
            ['name' => 'İstatistik', 'desc' => 'Verilerin toplanması, analiz edilmesi, yorumlanması ve olasılık hesapları üzerinden geleceğe yönelik anlamlı tahminler yapılmasını sağlayan matematik temelli bilimdir.'],
            ['name' => 'İlahiyat', 'desc' => 'İslam dininin temel kaynaklarını, inanç sistemini, tarihini ve dini bilimleri akademik bir perspektifle araştıran ve inceleyen bölümdür.'],
        ];
-       $onLisansMajors = [
+            
+           
+        $onLisansMajors = [
            // --- Sağlık Hizmetleri (العلوم الطبية والصحية - سنتين) ---
            ['name' => 'İlk ve Acil Yardım', 'description' => 'Kaza veya hastalık anında olay yerinde ilk müdahaleyi yapan ve hastayı güvenle hastaneye ulaştıran (paramedik) sağlık branşıdır.'],
            ['name' => 'Anestezi', 'description' => 'Operasyon öncesinde hastanın uyutulması (anestezi) ve operasyon boyunca hayati bulgularının takip edilmesi süreçlerinde anestezi doktoruna eşlik eden teknikerliktir.'],

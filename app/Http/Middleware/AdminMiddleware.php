@@ -15,6 +15,10 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        if (auth()->check() && auth()->user()->hasRole('careerpath')) {
+            return $next($request);
+        }
+        abort(403, 'Sistem yöneticisi yetkileriniz yok');
     }
-}
+
+} 

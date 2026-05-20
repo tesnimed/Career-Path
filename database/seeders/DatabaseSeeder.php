@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,28 +14,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Varsayılan bir kullanıcı oluşturun (isteğe bağlı).
-        User::updateOrCreate(
-            ['email' => 'admin@admin.com'],
-            [
-                'name' => 'careerpath',
-                'password' => Hash::make('123456789'),
-            ]
-        );
+        \Spatie\Permission\Models\Role::create(['name' => 'careerpath']);
+        \Spatie\Permission\Models\Role::create(['name' => 'user']);
 
-        // 2. Seeders onları doğru sırayla çalıştırın.
+        // 1. Varsayılan bir kullanıcı oluşturun (isteğe bağlı).
+        $admin = \App\Models\User::create([
+
+            'name' => 'careerpath',
+            'email' => 'internetmobil730@gmail.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('internet20mobil26'),
+        ]);
+        $admin->assignRole('careerpath');
+
         $this->call([
-            // Önce becerilerinizi yazın (resminizdeki gibi).
-            SkillCategorySeeder::class,
-            SkillSeeder::class,
-            
-            // Proje için temel verileri doldurun.
-            UniversitySeeder::class,   //44 üniversitenin doldurulması
-            MajorSeeder::class,        // Bölümler alanlarını doldurma (Lisans ve Ön Lisans)
-            
-            // Dış tabloların (Pivot Tablolar) planlanması
-            MajorUniversitySeeder::class, 
-            MajorSkillSeeder::class,
+        SkillCategorySeeder::class,
+        SkillSeeder::class,
+        UniversitySeeder::class,
+        MajorSeeder::class,
+        MajorUniversitySeeder::class,
+        MajorSkillSeeder::class,
         ]);
     }
 }
