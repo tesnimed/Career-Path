@@ -1,53 +1,50 @@
 @section('title', 'TÜM BÖLÜMLER')
 @extends('dashboard.layout')
 @section('content')
-<div class="box row justify-content-center mt-2">
-    <div class="card shadow-lg ">
-        <div class="card-body p-5 col-md-12">
-            <h2 class="text-xl title p-2 mb-5">Tüm Bölümler</h2>
-            <div>
-                <a href="{{ route('dashboard.majors.create') }}" class="ekle btn px-8 py-2">Yeni Bölüm Ekle</a>
-            </div>
+<div class="box row justify-content-center mt-2 px-2">
+    <div class="card shadow-lg col-12 col-md-11 p-0">
+        <div class="card-body p-4 d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3">
+            <h2 class="text-xl title m-0">Tüm Bölümler</h2>
+            <a href="{{ route('dashboard.majors.create') }}" class="ekle btn px-4 py-2 text-nowrap">Yeni Bölüm Ekle</a>
         </div>
 
-        <div class="shadow ">
-            <table class="min-w-full">
+        <div class="table-responsive px-3 pb-3">
+            <table class="table table-hover align-middle min-w-full m-0">
                 <thead>
-                    <tr>
-                        <th class="thead px-5 py-3 text-center">ID</th>
-                        <th class="thead px-5 py-3 text-center uppercase">Bölüm Adı</th>
-                        <th class="thead px-5 py-3 text-right uppercase">Derece</th>
-                        <th class="thead px-5 py-3 text-right uppercase">Eğitim Dilleri</th>
-                        <th class="thead px-5 py-3 text-center uppercase">İşlemler</th>
+                    <tr class="text-nowrap">
+                        <th class="thead px-3 py-3 text-center" style="width: 5%">ID</th>
+                        <th class="thead px-3 py-3 text-center uppercase" style="width: 35%">Bölüm Adı</th>
+                        <th class="thead px-3 py-3 text-center uppercase" style="width: 15%">Derece</th>
+                        <th class="thead px-3 py-3 text-center uppercase" style="width: 15%">Eğitim Dilleri</th>
+                        <th class="thead px-3 py-3 text-center uppercase" style="width: 30%">İşlemler</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($majors as $major)
                     <tr>
-                        <td class="px-5 py-4 text-center">{{ $major->id }}</td>
-                        <td class="px-5 py-4 text-center">
-                            <div>{{ $major->name}}</div>
+                        <td class="px-3 py-3 text-center fw-bold">{{ $major->id }}</td>
+                        <td class="px-3 py-3 text-center">
+                            <div class="fw-semibold text-wrap" style="max-width: 180px; margin: 0 auto;">{{ $major->name }}</div>
                         </td>
-                        <td class="px-5 py-4 text-right uppercase">
-                            <span class="px-2">
+                        <td class="px-3 py-3 text-center uppercase">
+                            <span class="badge bg-light text-dark border px-2 py-1">
                                 {{ str_replace('_', ' ', $major->degree_type) }}
                             </span>
                         </td>
-                        <td class="px-5 py-4 text-right uppercase">
-                            <span class="px-2">
+                        <td class="px-3 py-3 text-center uppercase">
+                            <span class="badge bg-light text-dark border px-2 py-1">
                                 {{ str_replace('_', ' ', $major->education_language) }}
                             </span>
                         </td>
-                        <td class="px-5 py-4 text-center">
-                            <a href="{{ route('dashboard.majors.show', $major->id) }}"
-                                class="detay btn px-8 py-2">Detayları Gör</a>
-                            <a href="{{ route('dashboard.majors.edit', $major->id) }}"
-                                class="düzenle btn px-8 py-2">Düzenle</a>
-                            <div>
-                                <form action="{{ route('dashboard.majors.destroy', $major->id) }}" method="POST"
-                                    class="inline">
+                        <td class="px-3 py-3 text-center">
+                            <div class="d-flex flex-wrap justify-content-center gap-1">
+                                <a href="{{ route('dashboard.majors.show', $major->id) }}"
+                                    class="detay btn btn-sm px-3 py-1">Detay</a>
+                                <a href="{{ route('dashboard.majors.edit', $major->id) }}"
+                                    class="düzenle btn btn-sm px-3 py-1">Düzenle</a>
+                                <form action="{{ route('dashboard.majors.destroy', $major->id) }}" method="POST" class="m-0 inline">
                                     @csrf @method('DELETE')
-                                    <button type="submit" class="sil-uni btn px-8 py-2"
+                                    <button type="submit" class="sil-uni btn btn-sm px-3 py-2"
                                         onclick="return confirm('Silmek istediğinize emin misiniz?')">Sil</button>
                                 </form>
                             </div>
