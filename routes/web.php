@@ -39,3 +39,4 @@ Route::middleware(['auth', 'role:careerpath'])->prefix('dashboard')->name('dashb
     Route::get('/majors/{id}', [MajorController::class, 'show'])->name('majors.show');
 });
 // test deploy
+// force clean build fixed 2
