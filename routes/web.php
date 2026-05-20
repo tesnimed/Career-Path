@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/quiz-results', [QuizController::class, 'submit'])->name('quiz_results.submit');
 });
 // روابط لوحة تحكم الإدارة (Admin)
-Route::middleware(['auth', 'admin'])->prefix('dashboard')->name('dashboard.')->group(function () {
+Route::middleware(['auth', 'role:careerpath'])->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::resource('skills', SkillController::class);
     Route::resource('majors', MajorController::class);
@@ -36,5 +36,5 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->name('dashboard.')->g
     Route::resource('skill_categories', SkillCategoryController::class);
     Route::resource('users', UserController::class);
     Route::get('universities/{university}/manage-majors', [UniversityController::class, 'manageMajors'])->name('universities.majors');
-
+    Route::get('/majors/{id}', [MajorController::class, 'show'])->name('majors.show');
 });

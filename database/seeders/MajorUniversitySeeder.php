@@ -11,11 +11,9 @@ class MajorUniversitySeeder extends Seeder
 {
     public function run(): void
     {
-        // Veritabanındaki tüm üniversiteleri ve bölümleri al
         $universities = University::all();
         $majors = Major::all();
 
-        // Eğer üniversite veya bölüm yoksa, uyarı ver ve işlemi durdur
         if ($universities->isEmpty() || $majors->isEmpty()) {
             $this->command->warn('Önce UniversitySeeder ve MajorSeeder çalıştırmalısın!');
             return;
@@ -100,7 +98,7 @@ class MajorUniversitySeeder extends Seeder
                         'tuition_usd'   => $price,
                         'created_at'    => $timestamp,
                         'updated_at'    => $timestamp,
-                        ];
+                    ];
                 }
 
                 if (count($data) >= 1000) {
