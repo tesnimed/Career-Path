@@ -11,12 +11,13 @@
 *{
     color: var(--color-text);
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    box-sizing: border-box;
 }
 body {
     background-color: var(--color-background);
     color: var(--color-text);
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-    font-size: 20px;
+    font-size: 16px;
     margin: 0;
     padding: 0;
 }
@@ -128,6 +129,7 @@ footer {
 
 .title {
     color: var(--color-title);
+    font-size: 2rem;
 }
 
 /* home page */
@@ -231,12 +233,11 @@ footer {
 }
 .sil-uni{
     background-color: #6c757d !important;
-    font-size: 20px;
+    font-size: 16px;
     border-color: #6c757d !important;
     color: var(--color-navbar-text) !important;
     border-radius: 5px;
-    margin-left: 18rem;
-    margin-top: -0.75rem;
+    margin: 0 !important;
 }
 .userbtn1{
     background-color: #FFCE56 !important;
