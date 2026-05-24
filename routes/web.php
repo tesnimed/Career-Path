@@ -31,12 +31,12 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:careerpath'])->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::resource('skills', SkillController::class);
-    Route::resource('majors', MajorController::class);
+    Route::resource('majors', MajorController::class);  // يقوم بإنشاء رابط show تلقائياً
     Route::resource('universities', UniversityController::class);
     Route::resource('skill_categories', SkillCategoryController::class);
     Route::resource('users', UserController::class);
     Route::get('universities/{university}/manage-majors', [UniversityController::class, 'manageMajors'])->name('universities.majors');
-    Route::get('/majors/{id}', [MajorController::class, 'show'])->name('majors.show');
+    
 });
 // test deploy
 // force clean build fixed 2
