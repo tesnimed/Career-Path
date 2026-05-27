@@ -55,14 +55,15 @@ class User extends Authenticatable implements MustVerifyEmail // تطبيق ال
     {
         return $this->role === 'admin';
     }
-
-    public function sendEmailVerificationNotification()
+public function sendEmailVerificationNotification()
     {
-    // سنرسل التنبيه الافتراضي للارافيل لكن نمرره عبر طابور قاعدة البيانات
-    $notification = new class extends \Illuminate\Auth\Notifications\VerifyEmail implements \Illuminate\Contracts\Queue\ShouldQueue {
-        use \Illuminate\Bus\Queueable;
-    };
-
-    $this->notify($notification);
+        // استدعاء الكلاس الرسمي المكتوب في الأسفل ليدعم الطابور بأمان وبدون تكرار
+        $this->notify(new CustomQueueableVerifyEmail());
     }
+} // هذا هو قوس إغلاق كلاس User الأساسي
+
+// كلاس رسمي مخصص يدعم التفعيل عبر الطابور الخلفي وقابل للـ Serialization (خارج كلاس User)
+class CustomQueueableVerifyEmail extends \Illuminate\Auth\Notifications\VerifyEmail implements \Illuminate\Contracts\Queue\ShouldQueue
+{
+    use \Illuminate\Bus\Queueable;
 }
