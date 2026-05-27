@@ -23,7 +23,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // روابط المستخدمين المسجلين (الكويز وتفاصيل الجامعة)
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/quiz', [QuizController::class, 'index'])->name('quiz');
     Route::post('/quiz', [QuizController::class, 'submit'])->name('quiz.submit');
     Route::get('/major-details/{id}', [MajorController::class, 'showPublic'])->name('major_details_public');
@@ -31,7 +31,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/quiz-results', [QuizController::class, 'submit'])->name('quiz_results.submit');
 });
 // روابط لوحة تحكم الإدارة (Admin)
-Route::middleware(['auth', 'role:careerpath', 'verified'])->prefix('dashboard')->name('dashboard.')->group(function () {
+Route::middleware(['auth', 'role:careerpath'])->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::resource('skills', SkillController::class);
     Route::resource('majors', MajorController::class);  // يقوم بإنشاء رابط show تلقائياً
