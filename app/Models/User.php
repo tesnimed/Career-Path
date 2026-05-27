@@ -11,7 +11,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable //implements MustVerifyEmail // تطبيق الواجهة على الكلاس
+class User extends Authenticatable implements MustVerifyEmail // تطبيق الواجهة على الكلاس
 {
     use HasFactory, Notifiable, HasRoles;
     use HasApiTokens;
@@ -58,13 +58,10 @@ class User extends Authenticatable //implements MustVerifyEmail // تطبيق ا
 
     public function sendEmailVerificationNotification()
     {
-    // إنشاء نسخة من التنبيه وإرسالها عبر الطابور الخلفي مباشرة
-    $notification = new \Illuminate\Auth\Notifications\VerifyEmail();
-    
-    // نحدد هنا أن التنبيه يرسل عبر طابور قاعدة البيانات
-    if (property_exists($notification, 'queue')) {
-        $notification->queue = 'default';
-    }
+    // سنرسل التنبيه الافتراضي للارافيل لكن نمرره عبر طابور قاعدة البيانات
+    $notification = new class extends \Illuminate\Auth\Notifications\VerifyEmail implements \Illuminate\Contracts\Queue\ShouldQueue {
+        use \Illuminate\Bus\Queueable;
+    };
 
     $this->notify($notification);
     }

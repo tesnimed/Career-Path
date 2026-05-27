@@ -16,7 +16,7 @@ class AuthController extends Controller
     $user = User::create(['name'=>$r->name,'email'=>$r->email,'password'=>Hash::make($r->password)]);
 
     // إطلاق حدث التسجيل لإرسال إيميل التحقق تلقائياً
-    //event(new Registered($user));
+    event(new Registered($user));
 
     Auth::login($user);
     return redirect()->route('quiz');
