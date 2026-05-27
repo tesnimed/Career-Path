@@ -55,4 +55,9 @@ class User extends Authenticatable implements MustVerifyEmail // تطبيق ال
     {
         return $this->role === 'admin';
     }
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify((new \Illuminate\Auth\Notifications\VerifyEmail)->delay(now()->addSeconds(2)));
+    }
 }
