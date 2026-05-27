@@ -69,18 +69,17 @@ Route::get('/run-queue-worker', function() {
 
 
 Route::get('/run-queue-worker', function() {
-    // مسح كاش الإعدادات نهائياً لضمان قراءة إعدادات الـ Gmail SMTP الجديدة
+    // مسح الكاش تماماً لفرض الإعدادات الجديدة (587 و tls)
     \Illuminate\Support\Facades\Artisan::call('config:clear');
     \Illuminate\Support\Facades\Artisan::call('cache:clear');
-    \Illuminate\Support\Facades\Artisan::call('config:cache');
-
+    
     try {
-        // تشغيل معالج الطابور لإطلاق كافة الرسائل المعلقة فوراً
-        \Illuminate\Support\Facades\Artisan::call('queue:work', [
-            '--stop-when-empty' => true,
-            '--tries' => 3
+        // تشغيل الطابور وإجبار لارافيل على معالجة الرسائل فوراً في المتصفح
+        $result = \Illuminate\Support\Facades\Artisan::call('queue:work', [
+            '--stop-when-empty' => true
         ]);
-        return "Gmail SMTP Connected: All queued emails processed successfully!";
+        
+        return "Queue executed! Output: " . \Illuminate\Support\Facades\Artisan::output();
     } catch (\Exception $e) {
         return "SMTP Error: " . $e->getMessage();
     }
