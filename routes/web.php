@@ -74,6 +74,6 @@ Route::get('/run-queue-worker', function() {
     \Illuminate\Support\Facades\Artisan::call('cache:clear');
     
     // تشغيل الطابور الخلفي لتفريغ الإيميلات المحجوزة
-    \Illuminate\Support\Facades\Artisan::queue('queue:work', ['--stop-when-empty' => true]);
-    return "Cache cleared and 4 queued emails processed successfully!";
+    \Illuminate\Support\Facades\Artisan::call('queue:work', ['--stop-when-empty' => true]);
+    return "All queued emails processed successfully directly in the browser!";
 });
