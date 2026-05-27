@@ -12,8 +12,6 @@ use App\Http\Controllers\SkillCategoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest; // هي مشان مسار معالجة ضغطة المستخدم على رابط التأكيد القادم في الإيميل
 
-use Illuminate\Support\Facades\Artisan;
-
 // الصفحات العامة
 Route::get('/', [HomeController::class, 'index'])->name('home');
     // روابط تسجيل الدخول
@@ -57,10 +55,3 @@ Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])
     ->name('verification.verify');
 
 // email link fix deployment
-
-
-Route::get('/clear-server-now', function() {
-    Artisan::call('config:clear');
-    Artisan::call('cache:clear');
-    return "Server Cache Cleared Successfully!";
-});
