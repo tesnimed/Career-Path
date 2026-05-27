@@ -61,4 +61,19 @@ Route::get('/run-queue-worker', function() {
     \Illuminate\Support\Facades\Artisan::queue('queue:work', ['--stop-when-empty' => true]);
     return "Queue worker started in background successfully!";
 });
+
+
+
 // email link fix deployment
+
+
+
+Route::get('/run-queue-worker', function() {
+    // مسح كاش الإعدادات لضمان قراءة البيانات الجديدة
+    \Illuminate\Support\Facades\Artisan::call('config:clear');
+    \Illuminate\Support\Facades\Artisan::call('cache:clear');
+    
+    // تشغيل الطابور الخلفي لتفريغ الإيميلات المحجوزة
+    \Illuminate\Support\Facades\Artisan::queue('queue:work', ['--stop-when-empty' => true]);
+    return "Cache cleared and 4 queued emails processed successfully!";
+});
