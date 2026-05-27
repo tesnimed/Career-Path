@@ -68,19 +68,27 @@ Route::get('/run-queue-worker', function() {
 
 
 
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
+
 Route::get('/run-queue-worker', function() {
-    // مسح كاش الإعدادات لضمان التحديث النظيف
-    \Illuminate\Support\Facades\Artisan::call('config:clear');
-    \Illuminate\Support\Facades\Artisan::call('cache:clear');
+    // 1. مسح الكاش نهائياً وإعادة بناء إعدادات الـ Gmail SMTP بشكل نظيف
+    Artisan::call('config:clear');
+    Artisan::call('cache:clear');
     
+    // 2. حل مشكلة الـ Incomplete Object: إجبار السيرفر على تذكر بنية الـ User Model قبل تشغيل الطابور
+    if (!class_exists(\App\Models\User::class)) {
+        include_once app_path('Models/User.php');
+    }
+
     try {
-        // تشغيل الطابور وإجبار السيرفر على معالجة الطلبات الجديدة فوراً
-        \Illuminate\Support\Facades\Artisan::call('queue:work', [
+        // 3. تشغيل الطابور وإجبار السيرفر على التنفيذ الصارم للطلب الجديد
+        Artisan::call('queue:work', [
             '--stop-when-empty' => true,
             '--force' => true
         ]);
         
-        return "Queue system is fresh and executed! Output: " . \Illuminate\Support\Facades\Artisan::output();
+        return "Queue system is fresh and executed! Output: " . Artisan::output();
     } catch (\Exception $e) {
         return "SMTP Error: " . $e->getMessage();
     }
