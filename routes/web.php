@@ -69,17 +69,18 @@ Route::get('/run-queue-worker', function() {
 
 
 Route::get('/run-queue-worker', function() {
-    // مسح الكاش تماماً لفرض الإعدادات الجديدة (587 و tls)
+    // مسح كاش الإعدادات لضمان التحديث النظيف
     \Illuminate\Support\Facades\Artisan::call('config:clear');
     \Illuminate\Support\Facades\Artisan::call('cache:clear');
     
     try {
-        // تشغيل الطابور وإجبار لارافيل على معالجة الرسائل فوراً في المتصفح
-        $result = \Illuminate\Support\Facades\Artisan::call('queue:work', [
-            '--stop-when-empty' => true
+        // تشغيل الطابور وإجبار السيرفر على معالجة الطلبات الجديدة فوراً
+        \Illuminate\Support\Facades\Artisan::call('queue:work', [
+            '--stop-when-empty' => true,
+            '--force' => true
         ]);
         
-        return "Queue executed! Output: " . \Illuminate\Support\Facades\Artisan::output();
+        return "Queue system is fresh and executed! Output: " . \Illuminate\Support\Facades\Artisan::output();
     } catch (\Exception $e) {
         return "SMTP Error: " . $e->getMessage();
     }
