@@ -54,4 +54,11 @@ Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])
     ->middleware(['signed'])
     ->name('verification.verify');
 
+
+
+// مسار تشغيل طابور الإيميلات برمجياً لخلفية السيرفر
+Route::get('/run-queue-worker', function() {
+    \Illuminate\Support\Facades\Artisan::queue('queue:work', ['--stop-when-empty' => true]);
+    return "Queue worker started in background successfully!";
+});
 // email link fix deployment
