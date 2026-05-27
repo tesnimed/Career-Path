@@ -58,6 +58,14 @@ class User extends Authenticatable implements MustVerifyEmail // تطبيق ال
 
     public function sendEmailVerificationNotification()
     {
-        $this->notify((new \Illuminate\Auth\Notifications\VerifyEmail)->delay(now()->addSeconds(2)));
+    // إنشاء نسخة من التنبيه وإرسالها عبر الطابور الخلفي مباشرة
+    $notification = new \Illuminate\Auth\Notifications\VerifyEmail();
+    
+    // نحدد هنا أن التنبيه يرسل عبر طابور قاعدة البيانات
+    if (property_exists($notification, 'queue')) {
+        $notification->queue = 'default';
+    }
+
+    $this->notify($notification);
     }
 }
