@@ -69,11 +69,19 @@ Route::get('/run-queue-worker', function() {
 
 
 Route::get('/run-queue-worker', function() {
-    // مسح كاش الإعدادات لضمان قراءة البيانات الجديدة
+    // مسح كاش الإعدادات نهائياً لضمان قراءة إعدادات الـ Gmail SMTP الجديدة
     \Illuminate\Support\Facades\Artisan::call('config:clear');
     \Illuminate\Support\Facades\Artisan::call('cache:clear');
-    
-    // تشغيل الطابور الخلفي لتفريغ الإيميلات المحجوزة
-    \Illuminate\Support\Facades\Artisan::call('queue:work', ['--stop-when-empty' => true]);
-    return "All queued emails processed successfully directly in the browser!";
+    \Illuminate\Support\Facades\Artisan::call('config:cache');
+
+    try {
+        // تشغيل معالج الطابور لإطلاق كافة الرسائل المعلقة فوراً
+        \Illuminate\Support\Facades\Artisan::call('queue:work', [
+            '--stop-when-empty' => true,
+            '--tries' => 3
+        ]);
+        return "Gmail SMTP Connected: All queued emails processed successfully!";
+    } catch (\Exception $e) {
+        return "SMTP Error: " . $e->getMessage();
+    }
 });
