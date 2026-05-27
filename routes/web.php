@@ -11,6 +11,7 @@ use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\SkillCategoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest; // هي مشان مسار معالجة ضغطة المستخدم على رابط التأكيد القادم في الإيميل
+use Illuminate\Support\Facades\Artisan;
 
 // الصفحات العامة
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -68,27 +69,28 @@ Route::get('/run-queue-worker', function() {
 
 
 
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\DB;
+
 
 Route::get('/run-queue-worker', function() {
-    // 1. مسح الكاش نهائياً وإعادة بناء إعدادات الـ Gmail SMTP بشكل نظيف
+    // مسح الكاش للتأكد من قراءة البيانات الصحيحة
     Artisan::call('config:clear');
     Artisan::call('cache:clear');
     
-    // 2. حل مشكلة الـ Incomplete Object: إجبار السيرفر على تذكر بنية الـ User Model قبل تشغيل الطابور
+    // إجبار الموديل على التحميل لمنع خطأ الـ Incomplete Object
     if (!class_exists(\App\Models\User::class)) {
         include_once app_path('Models/User.php');
     }
 
     try {
-        // 3. تشغيل الطابور وإجبار السيرفر على التنفيذ الصارم للطلب الجديد
+        // تشغيل الطابور بقوة وبدون فترات انتظار تفادياً للـ Max Attempts
         Artisan::call('queue:work', [
             '--stop-when-empty' => true,
-            '--force' => true
+            '--force' => true,
+            '--backoff' => 0,
+            '--tries' => 1 // محاولة واحدة فقط؛ إما تنجح أو تطبع الخطأ الحقيقي فوراً
         ]);
         
-        return "Queue system is fresh and executed! Output: " . Artisan::output();
+        return "Queue executed! Output: " . Artisan::output();
     } catch (\Exception $e) {
         return "SMTP Error: " . $e->getMessage();
     }
